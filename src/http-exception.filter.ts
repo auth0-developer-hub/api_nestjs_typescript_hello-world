@@ -13,6 +13,7 @@ import { ErrorMessage } from "./models/messages";
 const errorMessages = {
   400: "Bad credentials",
   401: "Requires Authentication",
+  403: "Permission denied",
   404: "Not Found",
   500: "Internal server error",
 };

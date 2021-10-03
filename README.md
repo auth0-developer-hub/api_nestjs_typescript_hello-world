@@ -1,14 +1,14 @@
-# Hello World API: NestJS + TypeScript Sample
+# Hello World API: NestJS + TypeScript Role-Based Access Control Sample
 
 You can use this sample project to learn how to secure a simple NestJS API server using Auth0.
 
-The `starter` branch offers a working API server that exposes three public endpoints. Each endpoint returns a different type of message: public, protected, and admin.
+This project offers a working API server that exposes three public endpoints. Each endpoint returns a different type of message: public, protected, and admin.
 
 The goal is to use Auth0 to only allow requests that contain a valid access token in their authorization header to access the protected and admin data. Additionally, only access tokens that contain a `read:admin-messages` permission should access the admin data, which is referred to as [Role-Based Access Control (RBAC)](https://auth0.com/docs/authorization/rbac/).
 
-[Check out the `basic-authorization` branch](https://github.com/auth0-developer-hub/api_nestjs_typescript_hello-world/tree/basic-authorization) to see authorization in action using Auth0.
+[Check out the `starter` branch](https://github.com/auth0-developer-hub/api_nestjs_typescript_hello-world/tree/starter) to see a simple example on how to set up a minimal API with NestJS.
 
-[Check out the `basic-role-based-access-control` branch](https://github.com/auth0-developer-hub/api_nestjs_typescript_hello-world/tree/basic-role-based-access-control) to see authorization and Role-Based Access Control (RBAC) in action using Auth0.
+[Check out the `basic-authorization` branch](https://github.com/auth0-developer-hub/api_nestjs_typescript_hello-world/tree/basic-authorization) to see specifically how to implement authorization using Auth0.
 
 ## Get Started
 
@@ -94,6 +94,23 @@ To get the access token to test your secure endpoints:
 
 Please note that you need to change the `http://path_to_your_api/` with your protected API endpoint path (you can find all the available API endpoints in the next section). Leave the `your-access-token` untouched, since that is the token you will use for authorization. After that, execute the command in a terminal, and you should be able to see your success message.
 
+
+## Test the Admin Endpoint
+
+The `GET /api/messages/admin` endpoint requires the access token to contain the `read:admin-messages` permission. The best way to simulate that client-server secured request is to use any of the Hello World client demo apps to log in as a user that has that permission.
+
+You can use the Auth0 Dashboard to create an `admin` role and assign it the`read:admin-messages` permission. Then, you can assign the `admin` role to any user that you want to access the `/admin` endpoint.
+
+If you need help doing so, check out the following resources:
+
+- [Create roles](https://auth0.com/docs/authorization/rbac/roles/create-roles)
+
+- [Create permissions](https://auth0.com/docs/get-started/dashboard/add-api-permissions)
+
+- [Add permissions to roles](https://auth0.com/docs/authorization/rbac/roles/add-permissions-to-roles)
+
+- [Assign roles to users](https://auth0.com/docs/users/assign-roles-to-users)
+
 ## API Endpoints
 
 The API server defines the following endpoints:
@@ -138,7 +155,7 @@ Status: 200 OK
 
 ### 🔓 Get admin message
 
-> You need to protect this endpoint using Auth0 and Role-Based Access Control (RBAC).
+> This endpoint is protected using authorization and RBAC. You need to use a valid Bearer token with the 'read:admin-messages' permissions to be able to test it
 
 ```bash
 GET /api/messages/admin
