@@ -6,22 +6,128 @@ The `starter` branch offers a working API server that exposes three public endpo
 
 The goal is to use Auth0 to only allow requests that contain a valid access token in their authorization header to access the protected and admin data. Additionally, only access tokens that contain a `read:admin-messages` permission should access the admin data, which is referred to as [Role-Based Access Control (RBAC)](https://auth0.com/docs/authorization/rbac/).
 
-## Run the Project
+[Check out the `basic-authorization` branch](https://github.com/auth0-developer-hub/api_nestjs_typescript_hello-world/tree/basic-authorization) to see authorization in action using Auth0.
 
-Install the project dependencies:
+[Check out the `basic-role-based-access-control` branch](https://github.com/auth0-developer-hub/api_nestjs_typescript_hello-world/tree/basic-role-based-access-control) to see authorization and Role-Based Access Control (RBAC) in action using Auth0.
+
+## Get Started
+
+The project uses the following language / framework versions:
+
+- Node.js v14.0+
+- TypeScript v4.3+
+- Nest.js v8.0+
+
+### Set up your environment
+
+Generate the .env file by running the following command.
+
+```bash
+cp .env.example .env
+```
+
+Feel free to change the values as needed directly in the .env file.
+
+After that, please install the project dependencies.
 
 ```bash
 npm install
 ```
 
-Create a `.env` file under the root project directory and populate it with the following environment variables:
+Run the project:
 
 ```bash
-PORT=6060
+npm start
 ```
 
-Run the project in development mode:
+## API Endpoints
+
+The API server defines the following endpoints:
+
+### 🔓 Get public message
 
 ```bash
-npm run start:dev
+GET /api/messages/public
+```
+
+#### Response
+
+```bash
+Status: 200 OK
+```
+
+```json
+{
+  "text": "The API doesn't require an access token to share this message."
+}
+```
+
+### 🔓 Get protected message
+
+> You need to protect this endpoint using Auth0.
+
+```bash
+GET /api/messages/protected
+```
+
+#### Response
+
+```bash
+Status: 200 OK
+```
+
+```json
+{
+  "text": "The API successfully validated your access token."
+}
+```
+
+### 🔓 Get admin message
+
+> You need to protect this endpoint using Auth0 and Role-Based Access Control (RBAC).
+
+```bash
+GET /api/messages/admin
+```
+
+#### Response
+
+```bash
+Status: 200 OK
+```
+
+```json
+{
+  "text": "The API successfully recognized you as an admin."
+}
+```
+
+## Error Handling
+
+### 400s errors
+
+#### Response
+
+```bash
+Status: Corresponding 400 status code
+```
+
+```json
+{
+  "message": "Message that describes the error that took place."
+}
+```
+
+### 500s errors
+
+#### Response
+
+```bash
+Status: 500 Internal Server Error
+```
+
+```json
+{
+  "message": "Message that describes the error that took place."
+}
 ```
