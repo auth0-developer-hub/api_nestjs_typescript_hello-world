@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { Message } from "../message";
+import { SuccessMessage } from "../models/messages";
 import { MessagesService } from "./messages.service";
 
 @Controller("api/messages")
@@ -7,17 +7,17 @@ export class MessagesController {
   constructor(private readonly messagesService: MessagesService) {}
 
   @Get("public")
-  async getPublic(): Promise<Message> {
+  async getPublic(): Promise<SuccessMessage> {
     return this.messagesService.getPublicMessage();
   }
 
   @Get("protected")
-  async getProtected(): Promise<Message> {
+  async getProtected(): Promise<SuccessMessage> {
     return this.messagesService.getProtectedMessage();
   }
 
   @Get("admin")
-  async getAdmin(): Promise<Message> {
+  async getAdmin(): Promise<SuccessMessage> {
     return this.messagesService.getAdminMessage();
   }
 }

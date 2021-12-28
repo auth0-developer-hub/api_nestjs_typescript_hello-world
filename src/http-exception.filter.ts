@@ -3,10 +3,18 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
+  InternalServerErrorException,
 } from "@nestjs/common";
 import { Response } from "express";
+import { ErrorMessage } from "./models/messages";
+
+const errorMessages = {
+  404: "Not Found",
+  500: "Internal server error",
+};
 
 @Catch(HttpException)
+@Catch(InternalServerErrorException)
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -14,7 +22,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
 
     response.status(status).json({
-      message: exception.message,
-    });
+      text: errorMessages[status],
+    } as ErrorMessage);
   }
 }

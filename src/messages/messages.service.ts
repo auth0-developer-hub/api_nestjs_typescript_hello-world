@@ -1,21 +1,21 @@
-import { Injectable } from "@nestjs/common";
-import { Message } from "../message";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { SuccessMessage } from "../models/messages";
 
 @Injectable()
 export class MessagesService {
-  getPublicMessage = (): Message => {
+  getPublicMessage = (): SuccessMessage => {
     return {
       message: "The API doesn't require an access token to share this message.",
     };
   };
 
-  getProtectedMessage = (): Message => {
+  getProtectedMessage = (): SuccessMessage => {
     return {
       message: "The API successfully validated your access token.",
     };
   };
 
-  getAdminMessage = (): Message => {
+  getAdminMessage = (): SuccessMessage => {
     return {
       message: "The API successfully recognized you as an admin.",
     };
