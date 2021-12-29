@@ -75,7 +75,7 @@ Finally, let's get the `AUTH0_DOMAIN` value with the following steps:
 Run the project
 
 ```bash
-npm start
+npm run dev
 ```
 
 ## Test the Protected Endpoints
