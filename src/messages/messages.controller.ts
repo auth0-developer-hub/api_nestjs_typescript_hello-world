@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { Message } from "../message";
+import { Message } from "../models/messages";
 import { MessagesService } from "./messages.service";
 
 @Controller("api/messages")
