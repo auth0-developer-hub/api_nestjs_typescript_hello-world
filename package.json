@@ -25,7 +25,9 @@
     "@nestjs/config": "^1.0.1",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "express-jwt": "^6.1.0",
     "helmet": "^4.6.0",
+    "jwks-rsa": "^2.0.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"

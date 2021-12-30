@@ -6,7 +6,13 @@ import { HttpExceptionFilter } from "./http-exception.filter";
 import { HeaderInterceptor } from "./interceptors/header.interceptor";
 
 function checkEnvironment(configService: ConfigService) {
-  const requiredEnvVars = ["PORT", "CLIENT_ORIGIN_URL"];
+  const requiredEnvVars = [
+    "PORT",
+    "CLIENT_ORIGIN_URL",
+    "AUTH0_AUDIENCE",
+    "AUTH0_DOMAIN",
+  ];
+
   requiredEnvVars.forEach((envVar) => {
     if (!configService.get<string>(envVar)) {
       throw Error(`Undefined environment variable: ${envVar}`);

@@ -25,8 +25,14 @@ Generate the .env file by running the following command.
 ```bash
 cp .env.example .env
 ```
+You should have the following variables in the .env file
 
-Feel free to change the values as needed directly in the .env file.
+```bash
+PORT=6060
+CLIENT_ORIGIN_URL=http://localhost:4040
+AUTH0_AUDIENCE=
+AUTH0_DOMAIN=
+```
 
 After that, please install the project dependencies.
 
@@ -34,11 +40,59 @@ After that, please install the project dependencies.
 npm install
 ```
 
-Run the project:
+You will need to follow the instructions on the next section (Connect your application to Auth0) to populate the values for AUTH0_AUDIENCE and AUTH0_DOMAIN in your .env file.
+
+### Connect your application to Auth0
+
+Create a free account in Auth0, and log into the dashboard. From this point, follow these steps to set up your API:
+
+- Click on Applications -> APIs on the Dashboard sidebar.
+
+- Click on **Create API**, and fill out the required fields. You can use the following sample data or provide your own:
+  - Name: _Hello World API Server_.
+  - Identifier: http://my.hello-world.server
+  - Signing Algorithm: RS256
+
+- Click on **Create**.
+
+For more information on this part, please check out ["Register APIs"](https://auth0.com/docs/get-started/set-up-apis).
+
+As a next step, let's get the value for `AUTH0_AUDIENCE`
+
+- Click on Applications -> APIs on the Dashboard sidebar, and click on the API you created in the previous step
+- Click on the Settings tab
+- Get the `Identifier` field's value and use it for the `AUTH0_AUDIENCE` in your `.env` file
+
+Finally, let's get the `AUTH0_DOMAIN` value with the following steps:
+
+- Click on Applications -> APIs on the Dashboard sidebar, and click on the API you created in the previous step
+- Click on the Test tab, and then on the cURL tab below if it's not selected
+- Copy the value from the `--url` parameter in the sample POST request, not including the `https://` or `/oauth/token` parts (for example, if the `--url` complete value is `https://dev-abcdefg.us.auth0.com/oauth/token`, just copy the `dev-abcdefg.us.auth0.com` part). Use this value for the `AUTH0_DOMAIN` in your `.env` file
+
+
+### Run the project
+
+Run the project in dev mode:
 
 ```bash
-npm start
+npm run dev
 ```
+
+## Test the Protected Endpoints
+
+To get the access token to test your secure endpoints:
+
+- Click on Applications -> APIs on the Dashboard sidebar, and click on your API
+
+- Click on the Test tab, and copy the cURL call in the "Sending the token to the API" section.
+
+    ```bash
+    curl --request GET \
+    --url http://path_to_your_api/ \
+    --header 'authorization: Bearer your-access-token'
+    ```
+
+Please note that you need to change the `http://path_to_your_api/` with your protected API endpoint path (you can find all the available API endpoints in the next section). Leave the `your-access-token` untouched, since that is the token you will use for authorization. After that, execute the command in a terminal, and you should be able to see your success message.
 
 ## API Endpoints
 
@@ -62,9 +116,9 @@ Status: 200 OK
 }
 ```
 
-### 🔓 Get protected message
+> 🔐 Protected Endpoints: These endpoints require the request to include an access token issued by Auth0 in the authorization header.
 
-> You need to protect this endpoint using Auth0.
+### 🔓 Get protected message
 
 ```bash
 GET /api/messages/protected
