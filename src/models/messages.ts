@@ -1,4 +1,8 @@
 export interface Message {
+  readonly metadata: {
+    readonly api: string;
+    readonly branch: string;
+  };
   readonly text: string;
 }
 

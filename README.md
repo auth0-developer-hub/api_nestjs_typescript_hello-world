@@ -25,6 +25,7 @@ Generate the .env file by running the following command.
 ```bash
 cp .env.example .env
 ```
+
 You should have the following variables in the .env file
 
 ```bash
@@ -49,6 +50,7 @@ Create a free account in Auth0, and log into the dashboard. From this point, fol
 - Click on Applications -> APIs on the Dashboard sidebar.
 
 - Click on **Create API**, and fill out the required fields. You can use the following sample data or provide your own:
+
   - Name: _Hello World API Server_.
   - Identifier: http://my.hello-world.server
   - Signing Algorithm: RS256
@@ -69,7 +71,6 @@ Finally, let's get the `AUTH0_DOMAIN` value with the following steps:
 - Click on the Test tab, and then on the cURL tab below if it's not selected
 - Copy the value from the `--url` parameter in the sample POST request, not including the `https://` or `/oauth/token` parts (for example, if the `--url` complete value is `https://dev-abcdefg.us.auth0.com/oauth/token`, just copy the `dev-abcdefg.us.auth0.com` part). Use this value for the `AUTH0_DOMAIN` in your `.env` file
 
-
 ### Run the project
 
 Run the project
@@ -86,14 +87,13 @@ To get the access token to test your secure endpoints:
 
 - Click on the Test tab, and copy the cURL call in the "Sending the token to the API" section.
 
-    ```bash
-    curl --request GET \
-    --url http://path_to_your_api/ \
-    --header 'authorization: Bearer your-access-token'
-    ```
+  ```bash
+  curl --request GET \
+  --url http://path_to_your_api/ \
+  --header 'authorization: Bearer your-access-token'
+  ```
 
 Please note that you need to change the `http://path_to_your_api/` with your protected API endpoint path (you can find all the available API endpoints in the next section). Leave the `your-access-token` untouched, since that is the token you will use for authorization. After that, execute the command in a terminal, and you should be able to see your success message.
-
 
 ## Test the Admin Endpoint
 
@@ -129,7 +129,11 @@ Status: 200 OK
 
 ```json
 {
-  "text": "The API doesn't require an access token to share this message."
+  "metadata": {
+    "api": "api_nestjs_typescript_hello-world",
+    "branch": "basic-role-based-access-control"
+  },
+  "text": "This is a public message."
 }
 ```
 
@@ -149,7 +153,11 @@ Status: 200 OK
 
 ```json
 {
-  "text": "The API successfully validated your access token."
+  "metadata": {
+    "api": "api_nestjs_typescript_hello-world",
+    "branch": "basic-role-based-access-control"
+  },
+  "text": "This is a protected message."
 }
 ```
 
@@ -169,7 +177,11 @@ Status: 200 OK
 
 ```json
 {
-  "text": "The API successfully recognized you as an admin."
+  "metadata": {
+    "api": "api_nestjs_typescript_hello-world",
+    "branch": "basic-role-based-access-control"
+  },
+  "text": "This is an admin message."
 }
 ```
 

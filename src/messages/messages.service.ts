@@ -5,19 +5,31 @@ import { Message } from "../models/messages";
 export class MessagesService {
   getPublicMessage = (): Message => {
     return {
-      text: "The API doesn't require an access token to share this message.",
+      metadata: {
+        api: "api_nestjs_typescript_hello-world",
+        branch: "basic-role-based-access-control",
+      },
+      text: "This is a public message.",
     };
   };
 
   getProtectedMessage = (): Message => {
     return {
-      text: "The API successfully validated your access token.",
+      metadata: {
+        api: "api_nestjs_typescript_hello-world",
+        branch: "basic-role-based-access-control",
+      },
+      text: "This is a protected message.",
     };
   };
 
   getAdminMessage = (): Message => {
     return {
-      text: "The API successfully recognized you as an admin.",
+      metadata: {
+        api: "api_nestjs_typescript_hello-world",
+        branch: "basic-role-based-access-control",
+      },
+      text: "This is an admin message.",
     };
   };
 }
