@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    image: api_nestjs_typescript_hello-world:starter
+    ports:
+      - "6060:6060"
+    env_file:
+      - .env
