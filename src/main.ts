@@ -23,8 +23,6 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new HeaderInterceptor());
 
-  app.use(nocache());
-
   app.enableCors({
     origin: configService.get<string>("CLIENT_ORIGIN_URL"),
     methods: ["GET"],
