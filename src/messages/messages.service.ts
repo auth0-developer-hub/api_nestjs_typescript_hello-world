@@ -3,7 +3,7 @@ import { Message, Metadata } from "../models/messages";
 
 const METADATA: Metadata = {
   api: "api_nestjs_typescript_hello-world",
-  branch: "starter",
+  branch: "basic-authorization",
 };
 
 @Injectable()
