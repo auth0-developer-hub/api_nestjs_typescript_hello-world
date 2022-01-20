@@ -1,9 +1,11 @@
 export interface Message {
-  readonly metadata: {
-    readonly api: string;
-    readonly branch: string;
-  };
+  readonly metadata: Metadata;
   readonly text: string;
+}
+
+export interface Metadata {
+  readonly api: string;
+  readonly branch: string;
 }
 
 export interface ErrorMessage {
