@@ -1,9 +1,9 @@
 import * as helmet from "helmet";
+import * as nocache from "nocache";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { HttpExceptionFilter } from "./http-exception.filter";
-import { HeaderInterceptor } from "./interceptors/header.interceptor";
 
 function checkEnvironment(configService: ConfigService) {
   const requiredEnvVars = [
@@ -27,7 +27,8 @@ async function bootstrap() {
   checkEnvironment(configService);
 
   app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalInterceptors(new HeaderInterceptor());
+
+  app.use(nocache());
 
   app.enableCors({
     origin: configService.get<string>("CLIENT_ORIGIN_URL"),
