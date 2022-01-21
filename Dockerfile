@@ -4,10 +4,10 @@ RUN mkdir /app \
 USER node
 WORKDIR /app
 COPY --chown=node:node package*.json ./
+RUN npm ci
 COPY --chown=node:node tsconfig*.json ./
 COPY --chown=node:node src /app/src
-RUN npm ci \
-    && npm run build
+RUN npm run build
 
 FROM node:16.13.1-buster-slim@sha256:0f5899ce17fba632bcbf2626164efe0fd2e4f354dc1d94eeb46d0af8b9cf268f as core
 RUN mkdir /app \
