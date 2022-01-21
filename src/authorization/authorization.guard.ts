@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   CanActivate,
   ExecutionContext,
   Injectable,
@@ -40,12 +39,12 @@ export class AuthorizationGuard implements CanActivate {
       await checkJwt(req, res);
       return true;
     } catch (error) {
-      if (error.code && error.code === "credentials_required") {
+      if (
+        error.code &&
+        (error.code === "credentials_required" ||
+          error.code === "invalid_token")
+      ) {
         throw new UnauthorizedException(error.message);
-      }
-
-      if (error.code && error.code === "invalid_token") {
-        throw new BadRequestException(error.message);
       }
 
       throw new InternalServerErrorException(error.message);

@@ -1,6 +1,5 @@
 import {
   ArgumentsHost,
-  BadRequestException,
   Catch,
   ExceptionFilter,
   HttpException,
@@ -11,7 +10,6 @@ import { Response } from "express";
 import { ErrorMessage } from "./models/messages";
 
 const errorMessages = {
-  400: "Bad credentials",
   401: "Requires Authentication",
   403: "Permission denied",
   404: "Not Found",
@@ -19,7 +17,6 @@ const errorMessages = {
 };
 
 @Catch(HttpException)
-@Catch(BadRequestException)
 @Catch(UnauthorizedException)
 @Catch(InternalServerErrorException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -27,6 +24,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response<ErrorMessage>>();
     const status = exception.getStatus();
+
+    if (exception.message === "jwt malformed") {
+      response.status(status).json({
+        message: "Bad credentials",
+      });
+      return;
+    }
 
     response.status(status).json({
       message: errorMessages[status],
