@@ -2,7 +2,7 @@ version: "3.8"
 services:
   api:
     build: .
-    image: api_nestjs_typescript_hello-world:basic-rbac
+    image: api_nestjs_typescript_hello-world:basic-role-based-access-control
     ports:
       - "6060:6060"
     env_file:
