@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   CanActivate,
   ExecutionContext,
   Injectable,
@@ -45,7 +44,7 @@ export class AuthorizationGuard implements CanActivate {
       }
 
       if (error.code && error.code === "invalid_token") {
-        throw new BadRequestException(error.message);
+        throw new UnauthorizedException(error.message);
       }
 
       throw new InternalServerErrorException(error.message);
