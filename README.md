@@ -58,7 +58,11 @@ Status: 200 OK
 
 ```json
 {
-  "text": "The API doesn't require an access token to share this message."
+  "metadata": {
+    "api": "api_nestjs_typescript_hello-world",
+    "branch": "starter"
+  },
+  "text": "This is a public message."
 }
 ```
 
@@ -78,7 +82,11 @@ Status: 200 OK
 
 ```json
 {
-  "text": "The API successfully validated your access token."
+  "metadata": {
+    "api": "api_nestjs_typescript_hello-world",
+    "branch": "starter"
+  },
+  "text": "This is a protected message."
 }
 ```
 
@@ -98,7 +106,11 @@ Status: 200 OK
 
 ```json
 {
-  "text": "The API successfully recognized you as an admin."
+  "metadata": {
+    "api": "api_nestjs_typescript_hello-world",
+    "branch": "starter"
+  },
+  "text": "This is a admin message."
 }
 ```
 
