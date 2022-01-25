@@ -1,23 +1,31 @@
 import { Injectable } from "@nestjs/common";
-import { Message } from "../models/messages";
+import { Message, Metadata } from "../models/messages";
+
+const METADATA: Metadata = {
+  api: "api_nestjs_typescript_hello-world",
+  branch: "basic-authorization",
+};
 
 @Injectable()
 export class MessagesService {
   getPublicMessage = (): Message => {
     return {
-      text: "The API doesn't require an access token to share this message.",
+      metadata: METADATA,
+      text: "This is a public message.",
     };
   };
 
   getProtectedMessage = (): Message => {
     return {
-      text: "The API successfully validated your access token.",
+      metadata: METADATA,
+      text: "This is a protected message.",
     };
   };
 
   getAdminMessage = (): Message => {
     return {
-      text: "The API successfully recognized you as an admin.",
+      metadata: METADATA,
+      text: "This is an admin message.",
     };
   };
 }
