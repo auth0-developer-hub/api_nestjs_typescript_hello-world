@@ -39,11 +39,11 @@ export class AuthorizationGuard implements CanActivate {
       await checkJwt(req, res);
       return true;
     } catch (error) {
-      if (
-        error.code &&
-        (error.code === "credentials_required" ||
-          error.code === "invalid_token")
-      ) {
+      if (error.code && error.code === "credentials_required") {
+        throw new UnauthorizedException(error.message);
+      }
+
+      if (error.code && error.code === "invalid_token") {
         throw new UnauthorizedException(error.message);
       }
 
