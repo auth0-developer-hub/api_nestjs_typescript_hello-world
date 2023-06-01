@@ -2,6 +2,8 @@ import { Controller, Get, UseGuards } from '@nestjs/common';
 import { Message } from '../models/messages';
 import { MessagesService } from './messages.service';
 import { AuthorizationGuard } from '../authorization/authorization.guard';
+import { PermissionsGuard } from 'src/authorization/permissions.guard';
+import { MessagesPermissions } from './messages.permissions';
 
 @Controller('messages')
 export class MessagesController {
@@ -18,6 +20,7 @@ export class MessagesController {
     return this.messagesService.getProtectedMessage();
   }
 
+  @UseGuards(PermissionsGuard([MessagesPermissions.READ_ADMIN]))
   @UseGuards(AuthorizationGuard)
   @Get('admin')
   async getAdmin(): Promise<Message> {

@@ -1,10 +1,10 @@
-# NestJS/TypeScript: API Basic Access Control Code Sample
+# NestJS/TypeScript: API Basic Role-Based Access Control (RBAC) Code Sample
 
-This TypeScript code sample demonstrates **how to implement authorization** in NestJS API servers using Auth0.
+This TypeScript code sample demonstrates **how to implement Role-Based Access Control (RBAC)** in NestJS API servers using Auth0.
 
 This code sample is part of the ["Auth0 Developer Resources"](https://developer.auth0.com/resources), a place where you can explore the authentication and authorization features of the Auth0 Identity Platform.
 
-Visit the ["NestJS/TypeScript Code Sample: Authorization For Basic APIs"](https://developer.auth0.com/resources/code-samples/api/nestjs/basic-authorization) page for instructions on how to configure and run this code sample and how to integrate it with a Single-Page Application (SPA) of your choice.
+Visit the ["NestJS/TypeScript Code Sample: Role-Based Access Control For Basic APIs"](https://developer.auth0.com/resources/code-samples/api/nestjs/basic-role-based-access-control) page for instructions on how to configure and run this code sample and how to integrate it with a Single-Page Application (SPA) of your choice.
 
 ## Why Use Auth0?
 
